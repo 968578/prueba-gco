@@ -1,8 +1,16 @@
-package com.prueba_gco.prueba_gco.domain.model;
+package com.prueba_gco.prueba_gco.infraestructure.persistence;
 
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.Data;
 
-public class Producto {
+
+@Entity
+@Table(name = "productos")
+class ProductoEntity {
+    @Id
     private Long id;
     private String nombre;
     private String descripcion;
@@ -12,7 +20,7 @@ public class Producto {
     private String fechaCreacion;
     private Long categoriaId;
 
-    public Producto(Integer stock, Long id, String nombre, String descripcion, Double precio, String codigo, String fechaCreacion, Long categoriaId) {
+    public ProductoEntity(Integer stock, Long id, String nombre, String descripcion, Double precio, String codigo, String fechaCreacion, Long categoriaId) {
         this.stock = stock;
         this.id = id;
         this.nombre = nombre;
@@ -22,6 +30,8 @@ public class Producto {
         this.fechaCreacion = fechaCreacion;
         this.categoriaId = categoriaId;
     }
+
+    public ProductoEntity() { }
 
     public Long getId() {
         return id;
