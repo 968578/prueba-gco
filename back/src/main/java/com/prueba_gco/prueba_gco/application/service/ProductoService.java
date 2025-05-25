@@ -5,6 +5,8 @@ import com.prueba_gco.prueba_gco.domain.ports.in.ProductoUseCase;
 import com.prueba_gco.prueba_gco.domain.ports.out.ProductoRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ProductoService implements ProductoUseCase {
     private final ProductoRepository productoRepo;
@@ -18,4 +20,11 @@ public class ProductoService implements ProductoUseCase {
     public Producto crearProducto(Producto producto) {
         return productoRepo.guardar(producto);
     }
+
+    @Override
+    public List<Producto> listarProductos() {
+        return productoRepo.listar();
+    }
+
+
 }

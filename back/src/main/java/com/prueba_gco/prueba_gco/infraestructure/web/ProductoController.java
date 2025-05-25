@@ -3,10 +3,10 @@ package com.prueba_gco.prueba_gco.infraestructure.web;
 import com.prueba_gco.prueba_gco.domain.model.Producto;
 import com.prueba_gco.prueba_gco.domain.ports.in.ProductoUseCase;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/productos")
@@ -23,4 +23,9 @@ public class ProductoController {
         return ResponseEntity.ok(productoCreado);
     }
 
+    @GetMapping
+    public ResponseEntity<List<Producto>> consultarProductos(){
+        List<Producto> productos =  productoUseCase.listarProductos();
+        return ResponseEntity.ok(productos);
+    }
 }

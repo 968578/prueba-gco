@@ -4,6 +4,8 @@ import com.prueba_gco.prueba_gco.domain.model.Producto;
 import com.prueba_gco.prueba_gco.domain.ports.out.ProductoRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public class ProductoAdapter implements ProductoRepository {
     private final ProductoJpaRepository productoJpaRepo;
@@ -45,6 +47,14 @@ public class ProductoAdapter implements ProductoRepository {
         ProductoEntity productoEntityGuardado =  productoJpaRepo.save(productoEntity);
         return this.toDomain(productoEntityGuardado);
     }
+
+    public List<Producto> listar(){
+        List<ProductoEntity> productosEntity = productoJpaRepo.findAll();
+        return productosEntity.stream()
+                .map(this::toDomain)
+                .toList();
+    }
+
 
 
 
