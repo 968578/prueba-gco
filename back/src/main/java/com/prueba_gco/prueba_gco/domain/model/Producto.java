@@ -1,6 +1,5 @@
 package com.prueba_gco.prueba_gco.domain.model;
 
-import lombok.Data;
 
 public class Producto {
     private Long id;
