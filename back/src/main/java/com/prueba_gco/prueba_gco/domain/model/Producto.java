@@ -24,6 +24,21 @@ public class Producto {
         this.categoriaId = categoriaId;
     }
 
+    @Override
+    public String toString() {
+        return "Producto{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", descripcion='" + descripcion + '\'' +
+                ", estado=" + estado +
+                ", precio=" + precio +
+                ", stock=" + stock +
+                ", codigo='" + codigo + '\'' +
+                ", fechaCreacion='" + fechaCreacion + '\'' +
+                ", categoriaId=" + categoriaId +
+                '}';
+    }
+
     public Long getId() {
         return id;
     }

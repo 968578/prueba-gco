@@ -19,6 +19,8 @@ public class ProductoController {
 
     @PostMapping
     public ResponseEntity<Producto> crearProducto(@RequestBody Producto producto){
+        System.out.println("aqui imprime el producto");
+        System.out.println(producto);
         Producto productoCreado = productoUseCase.crearProducto(producto);
         return ResponseEntity.ok(productoCreado);
     }
