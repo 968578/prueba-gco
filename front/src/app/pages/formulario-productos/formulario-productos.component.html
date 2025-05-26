@@ -1,2 +1,109 @@
 <app-header></app-header>
-<p>formulario-productos works!</p>
+<div class="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-md border border-gray-100 my-5">
+  <h2 class="text-2xl font-semibold mb-8 text-gray-800">Formulario de Producto</h2>
+
+  <form (ngSubmit)="onSubmit()" class="grid grid-cols-1 md:grid-cols-2 gap-8">
+    <div class="space-y-6">
+      <div>
+        <label-primary
+          [label]="'Nombre'"
+          [obligatorio]="true"
+        />
+        <input-primary
+          [(ngModel)]="producto.nombre"
+          name="'nombre'"
+          value="producto.nombre"
+        />  
+      </div>
+      <div  class="md:col-span-2">
+        <label-primary
+          [label]="'Descripción'"
+          [obligatorio]="false"
+        />
+        <input-primary
+          [(ngModel)]="producto.descripcion"
+          name="'descripcion'"
+          value="producto.descripcion"
+        />  
+      </div>
+
+      <div>
+        <label-primary
+          [label]="'Estado'"
+          [obligatorio]="true"
+        />
+        <select
+          [(ngModel)]="producto.estado"
+          name="estado"
+          required
+          class="w-full border-0 border-b border-gray-300 focus:border-blue-500 focus:ring-0 focus:outline-none"
+        >
+          <option [ngValue]="1">Activo</option>
+          <option [ngValue]="0">Inactivo</option>
+        </select>
+      </div>
+
+      <div>
+        <label-primary
+          [label]="'Precio'"
+          [obligatorio]="true"
+        />
+        <input-primary
+          [(ngModel)]="producto.precio"
+          name="'precio'"
+          value="producto.precio"
+        />  
+      </div>
+    </div>
+
+    <div class="space-y-6">
+      <div>
+        <label-primary
+          [label]="'Stock'"
+          [obligatorio]="true"
+        />
+        <input-primary
+          [(ngModel)]="producto.stock"
+          name="'stock'"
+          value="producto.stock"
+        />  
+      </div>
+
+      <div>
+        <label-primary
+          [label]="'Código'"
+          [obligatorio]="true"
+        />
+        <input-primary
+          [(ngModel)]="producto.codigo"
+          name="'codigo'"
+          value="producto.codigo"
+        />  
+      </div>
+      <div>
+        <label-primary
+          [label]="'Categoria'"
+          [obligatorio]="true"
+        />
+        <select
+          [(ngModel)]="producto.categoriaId"
+          name="categoriaId"
+          required
+          class="w-full border-0 border-b border-gray-300 focus:border-blue-500 focus:ring-0 focus:outline-none"
+        >
+          <option [ngValue]="1">Categoria 1</option>
+          <option [ngValue]="2">Categoria 2</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="col-span-1 md:col-span-2 pt-4">
+      <button
+        type="submit"
+        class="w-full bg-blue-600 text-white font-semibold py-2 rounded-md hover:bg-blue-700 transition cursor-pointer"
+      >
+        Guardar
+      </button>
+    </div>
+  </form>
+</div>

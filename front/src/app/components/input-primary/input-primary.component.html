@@ -1,0 +1,10 @@
+<input
+  type="text"
+  [name]="name"
+  [value]="value"
+  [disabled]="disabled"
+  (input)="updateValue($event)"
+  (blur)="onTouched()"
+  class="w-full border-0 border-b border-gray-300 focus:border-blue-500 focus:ring-0 focus:outline-none"
+  
+/>  
