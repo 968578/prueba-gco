@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
-import { RouterLink, RouterOutlet } from '@angular/router';
-import { FormularioProductosComponent } from "./pages/formulario-productos/formulario-productos.component";
-import { ListaProductosComponent } from "./pages/lista-productos/lista-productos.component";
+import {  RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, RouterLink, FormularioProductosComponent, ListaProductosComponent],
+  imports: [RouterOutlet],
+
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
