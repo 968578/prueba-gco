@@ -4,7 +4,6 @@ export interface Categoria {
   descripcion: string;
 }
 
-
 export interface Producto {
   id: number;
   nombre: string;
