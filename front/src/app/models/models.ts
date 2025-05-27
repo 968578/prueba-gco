@@ -12,7 +12,7 @@ export interface Producto {
   precio: number;
   stock: number;
   codigo: string;
-  fechaCreacion: string;
+  fechaCreacion?: string;
   categoriaId: number;
 }
 
@@ -23,4 +23,10 @@ export interface Movimiento {
   cantidad: number;
   fecha: string;
   descripcion: string;
+}
+
+
+export interface ResponseApi{
+  name: string;
+  data: any;
 }

@@ -2,7 +2,7 @@
 <div class="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-md border border-gray-100 my-5">
   <h2 class="text-2xl font-semibold mb-8 text-gray-800">Formulario de Producto</h2>
 
-  <form [formGroup]="productoForm" (ngSubmit)="onSubmit()" class="grid grid-cols-1 md:grid-cols-2 gap-8">
+  <form [formGroup]="productoForm" (ngSubmit)="submitProducto()" class="grid grid-cols-1 md:grid-cols-2 gap-8">
     <div class="space-y-6">
       <div>
         <label-primary

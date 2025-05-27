@@ -5,6 +5,7 @@ import com.prueba_gco.prueba_gco.domain.ports.in.ProductoUseCase;
 import com.prueba_gco.prueba_gco.domain.ports.out.ProductoRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -18,6 +19,9 @@ public class ProductoService implements ProductoUseCase {
 
     @Override
     public Producto crearProducto(Producto producto) {
+        if(producto.getFechaCreacion() == null){
+            producto.setFechaCreacion(LocalDate.now().toString());
+        }
         return productoRepo.guardar(producto);
     }
 

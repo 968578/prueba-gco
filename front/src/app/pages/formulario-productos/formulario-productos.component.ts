@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { HeaderComponent } from "../../components/header/header.component";
 import { AbstractControl, FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
-import { Producto } from '../../models/models';
 import { LabelPrimaryComponent } from "../../components/label-primary/label-primary.component";
 import { InputPrimaryComponent } from "../../components/input-primary/input-primary.component";
-import { fromPromise } from 'rxjs/internal/observable/innerFrom';
 import { ErrorFormComponent } from "../../components/error-form/error-form.component";
 import { CommonModule } from '@angular/common';
+import { ProductoService } from '../../service/producto.service';
+import { Producto } from '../../models/models';
 
 @Component({
   selector: 'app-formulario-productos',
@@ -15,7 +15,9 @@ import { CommonModule } from '@angular/common';
   styleUrl: './formulario-productos.component.css'
 })
 export class FormularioProductosComponent implements OnInit {
-
+  
+  constructor(private productosService: ProductoService) {}
+  
   productoForm = new FormGroup({
     nombre: new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(45)]),
     descripcion: new FormControl('', Validators.maxLength(200)),
@@ -26,33 +28,43 @@ export class FormularioProductosComponent implements OnInit {
     categoriaId: new FormControl('', Validators.required),
   })
 
-  onSubmit(){
+  submitProducto(){
     if(this.productoForm.invalid){
       return;
     }
-    console.log(this.productoForm.valid)
-    console.log(this.productoForm.get("nombre")?.errors)
-    console.log(this.productoForm.get("descripcion")?.errors)
-    console.log(this.productoForm.get("estado")?.errors)
-    console.log(this.productoForm.get("precio")?.errors)
-    console.log(this.productoForm.get("stock")?.errors)
-    console.log(this.productoForm.get("codigo")?.errors)
-    console.log(this.productoForm.get("categoriaId")?.errors)
     
-    console.log("lo que ha diggitado el cliente");
-    console.log(this.productoForm.value);
+    const formValue = this.productoForm.value;
+    
+    const productoModel : Producto = {
+      nombre: String(formValue.nombre),
+      descripcion: String(formValue.descripcion),
+      estado: Number(formValue.estado),
+      precio: Number(formValue.precio),
+      stock: Number(formValue.stock),
+      codigo: String(formValue.codigo),
+      categoriaId: Number(formValue.categoriaId),
+    }
+      
+    this.productosService.crearProducto(productoModel).subscribe({
+    next: (res) => {
+      console.log('Producto creado con éxito:', res);
+      
+      this.productoForm.reset();
+    },
+    error: (err) => {
+      // debo agregar aqui un manjeador
+      console.log("Error")
+      console.log(err);
+    }
+  });
+
+    
   }
 
   validateNumber(inp :AbstractControl): ValidationErrors | null {
-    if(isNaN(inp.value)){
-      return { notNumber:true}
-    } else {
-      return null
-    }
-    // return isNaN(control.value) ? { notNumber: true } : null;
+    return isNaN(inp.value) ? { notNumber: true } : null;
   }
 
   ngOnInit(): void {
   }
-   constructor(private formBuilder: FormBuilder) {}
 }
