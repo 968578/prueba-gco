@@ -2,29 +2,30 @@
 <div class="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-md border border-gray-100 my-5">
   <h2 class="text-2xl font-semibold mb-8 text-gray-800">Formulario de Producto</h2>
 
-  <form (ngSubmit)="onSubmit()" class="grid grid-cols-1 md:grid-cols-2 gap-8">
+  <form [formGroup]="productoForm" (ngSubmit)="onSubmit()" class="grid grid-cols-1 md:grid-cols-2 gap-8">
     <div class="space-y-6">
       <div>
         <label-primary
           [label]="'Nombre'"
           [obligatorio]="true"
         />
-        <input-primary
-          [(ngModel)]="producto.nombre"
-          name="'nombre'"
-          value="producto.nombre"
-        />  
+        <input-primary formControlName="nombre"/>  
+        <error-form *ngIf="productoForm.get('nombre')?.errors?.['required'] && productoForm.get('nombre')?.touched" 
+          [error]="'Es requerido'" 
+        />
+        <error-form *ngIf="productoForm.get('nombre')?.errors?.['minlength'] && productoForm.get('nombre')?.touched" 
+          [error]="'Mínímo 4 caracteres'" 
+        />
+        <error-form *ngIf="productoForm.get('nombre')?.errors?.['maxlength'] && productoForm.get('nombre')?.touched" 
+          [error]="'Máximo 45 caracteres'" 
+        />
       </div>
       <div  class="md:col-span-2">
         <label-primary
           [label]="'Descripción'"
           [obligatorio]="false"
         />
-        <input-primary
-          [(ngModel)]="producto.descripcion"
-          name="'descripcion'"
-          value="producto.descripcion"
-        />  
+        <input-primary formControlName="descripcion"/>
       </div>
 
       <div>
@@ -33,14 +34,16 @@
           [obligatorio]="true"
         />
         <select
-          [(ngModel)]="producto.estado"
-          name="estado"
-          required
+          formControlName="estado"
           class="w-full border-0 border-b border-gray-300 focus:border-blue-500 focus:ring-0 focus:outline-none"
         >
-          <option [ngValue]="1">Activo</option>
-          <option [ngValue]="0">Inactivo</option>
+          <option value="">--Seleccione--</option>
+          <option value="1">Activo</option>
+          <option value="0">Inactivo</option>
         </select>
+        <error-form *ngIf="productoForm.get('estado')?.errors?.['required'] && productoForm.get('estado')?.touched" 
+          [error]="'Es requerido'" 
+        />
       </div>
 
       <div>
@@ -48,11 +51,13 @@
           [label]="'Precio'"
           [obligatorio]="true"
         />
-        <input-primary
-          [(ngModel)]="producto.precio"
-          name="'precio'"
-          value="producto.precio"
-        />  
+        <input-primary formControlName="precio"/>
+        <error-form *ngIf="productoForm.get('precio')?.errors?.['required'] && productoForm.get('precio')?.touched" 
+          [error]="'Es requerido'" 
+        />
+        <error-form *ngIf="productoForm.get('precio')?.errors?.['notNumber'] && productoForm.get('precio')?.touched" 
+          [error]="'Debe ser número'" 
+        />
       </div>
     </div>
 
@@ -62,11 +67,13 @@
           [label]="'Stock'"
           [obligatorio]="true"
         />
-        <input-primary
-          [(ngModel)]="producto.stock"
-          name="'stock'"
-          value="producto.stock"
-        />  
+        <input-primary formControlName="stock"/>
+        <error-form *ngIf="productoForm.get('stock')?.errors?.['required'] && productoForm.get('stock')?.touched" 
+          [error]="'Es requerido'" 
+        />
+        <error-form *ngIf="productoForm.get('stock')?.errors?.['notNumber'] && productoForm.get('stock')?.touched" 
+          [error]="'Debe ser número'" 
+        />
       </div>
 
       <div>
@@ -74,11 +81,16 @@
           [label]="'Código'"
           [obligatorio]="true"
         />
-        <input-primary
-          [(ngModel)]="producto.codigo"
-          name="'codigo'"
-          value="producto.codigo"
-        />  
+        <input-primary formControlName="codigo"/>
+        <error-form *ngIf="productoForm.get('codigo')?.errors?.['required'] && productoForm.get('codigo')?.touched" 
+          [error]="'Es requerido'" 
+        />
+        <error-form *ngIf="productoForm.get('codigo')?.errors?.['minlength'] && productoForm.get('codigo')?.touched" 
+          [error]="'Mínímo 4 caracteres'" 
+        />
+        <error-form *ngIf="productoForm.get('codigo')?.errors?.['maxlength'] && productoForm.get('codigo')?.touched" 
+          [error]="'Máximo 20 caracteres'" 
+        />
       </div>
       <div>
         <label-primary
@@ -86,22 +98,28 @@
           [obligatorio]="true"
         />
         <select
-          [(ngModel)]="producto.categoriaId"
-          name="categoriaId"
-          required
+          formControlName="categoriaId"
           class="w-full border-0 border-b border-gray-300 focus:border-blue-500 focus:ring-0 focus:outline-none"
         >
-          <option [ngValue]="1">Categoria 1</option>
-          <option [ngValue]="2">Categoria 2</option>
+          <option value="">--Seleccione--</option>
+          <option value="1">Categoria 1</option>
+          <option value="2">Categoria 2</option>
         </select>
+        <error-form *ngIf="productoForm.get('categoriaId')?.errors?.['required'] && productoForm.get('categoriaId')?.touched" 
+          [error]="'Es requerido'" 
+        />
       </div>
     </div>
 
     <div class="col-span-1 md:col-span-2 pt-4">
       <button
         type="submit"
-        class="w-full bg-blue-600 text-white font-semibold py-2 rounded-md hover:bg-blue-700 transition cursor-pointer"
-      >
+        [ngClass]="{
+          'bg-blue-600 hover:bg-blue-700': productoForm.valid,
+          'bg-gray-400 cursor-not-allowed': productoForm.invalid
+        }"
+        class="w-full text-white font-semibold py-2 rounded-md transition"
+        >
         Guardar
       </button>
     </div>
