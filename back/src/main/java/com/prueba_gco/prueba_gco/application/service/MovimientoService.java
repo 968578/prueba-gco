@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public class MovimientoService implements MovimientoUseCase {
@@ -25,7 +26,6 @@ public class MovimientoService implements MovimientoUseCase {
 
     @Override
     public Movimiento crearMovimiento(Movimiento movimiento) {
-
         productoUseCase.actualizarStock(movimiento);
         if(movimiento.getFechaCreacion() == null){
             movimiento.setFechaCreacion(LocalDateTime.now().toString());
@@ -33,5 +33,8 @@ public class MovimientoService implements MovimientoUseCase {
         return movimientoRepo.crear(movimiento);
     }
 
-
+    @Override
+    public List<Movimiento> consultarMovimientosProducto(long idProduto) {
+        return movimientoRepo.consultarPorProducto(idProduto);
+    }
 }

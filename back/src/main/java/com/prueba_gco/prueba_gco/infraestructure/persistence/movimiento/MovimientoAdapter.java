@@ -4,6 +4,8 @@ import com.prueba_gco.prueba_gco.domain.model.Movimiento;
 import com.prueba_gco.prueba_gco.domain.ports.out.MovimientoRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public class MovimientoAdapter implements MovimientoRepository {
     private final MovimientoJpaRepository movimientoJpaRepo;
@@ -34,11 +36,17 @@ public class MovimientoAdapter implements MovimientoRepository {
         return entity;
     }
 
-
-
     public Movimiento crear(Movimiento movimiento){
         MovimientoEntity movimientoEntity = this.toEntity(movimiento);
         MovimientoEntity movimietnoEntityGuardado = movimientoJpaRepo.save(movimientoEntity);
         return toDomain(movimietnoEntityGuardado);
+    }
+
+    @Override
+    public List<Movimiento> consultarPorProducto(Long idProducto) {
+        List<MovimientoEntity> movimientoEntidades = movimientoJpaRepo.findByProductoId(idProducto);
+        return movimientoEntidades.stream()
+                .map(this::toDomain)
+                .toList();
     }
 }
