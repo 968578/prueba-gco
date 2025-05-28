@@ -5,6 +5,7 @@ import com.prueba_gco.prueba_gco.domain.ports.out.ProductoRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class ProductoAdapter implements ProductoRepository {
@@ -55,6 +56,10 @@ public class ProductoAdapter implements ProductoRepository {
                 .toList();
     }
 
+    public Optional<Producto> buscarPorId(Long id){
+        return productoJpaRepo.findById(id)
+                .map(this::toDomain);
+    }
 
 
 

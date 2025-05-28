@@ -30,4 +30,11 @@ public class ProductoController {
         List<Producto> productos =  productoUseCase.listarProductos();
         return ResponseEntity.ok(productos);
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Producto> consultarProductosPorId(@PathVariable Long id){
+        return productoUseCase.buscarProductoPorId(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
 }
