@@ -34,4 +34,7 @@ public class ProductoService implements ProductoUseCase {
     @Override
     public Optional<Producto> buscarProductoPorId(Long id){return productoRepo.buscarPorId(id);}
 
+    @Override
+    public Producto actualizarProducto(Producto producto){return productoRepo.actualizar(producto);}
+
 }

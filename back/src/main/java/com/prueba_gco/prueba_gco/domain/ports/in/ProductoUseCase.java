@@ -9,4 +9,5 @@ public interface ProductoUseCase {
     Producto crearProducto(Producto producto);
     List<Producto> listarProductos();
     Optional<Producto> buscarProductoPorId(Long id);
+    Producto actualizarProducto(Producto producto);
 }

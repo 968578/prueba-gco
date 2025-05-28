@@ -61,6 +61,20 @@ public class ProductoAdapter implements ProductoRepository {
                 .map(this::toDomain);
     }
 
+    public Producto actualizar(Producto producto){
+        ProductoEntity productoEntity = productoJpaRepo.findById(producto.getId()).orElseThrow();
+        productoEntity.setNombre(producto.getNombre());
+        productoEntity.setDescripcion(producto.getDescripcion());
+        productoEntity.setEstado(producto.getEstado());
+        productoEntity.setPrecio(producto.getPrecio());
+        productoEntity.setStock(producto.getStock());
+        productoEntity.setCodigo(producto.getCodigo());
+        productoEntity.setCategoriaId(producto.getCategoriaId());
+        productoJpaRepo.save(productoEntity);
+        return producto;
+    }
+
+
 
 
 }

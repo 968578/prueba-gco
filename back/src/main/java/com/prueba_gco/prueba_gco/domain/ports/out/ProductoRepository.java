@@ -9,4 +9,5 @@ public interface ProductoRepository {
     Producto guardar(Producto producto);
     List<Producto> listar();
     Optional<Producto> buscarPorId(Long id);
+    Producto actualizar(Producto producto);
 }
