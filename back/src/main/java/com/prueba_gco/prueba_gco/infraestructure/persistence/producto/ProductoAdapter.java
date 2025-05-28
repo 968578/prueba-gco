@@ -1,5 +1,6 @@
-package com.prueba_gco.prueba_gco.infraestructure.persistence;
+package com.prueba_gco.prueba_gco.infraestructure.persistence.producto;
 
+import com.prueba_gco.prueba_gco.domain.model.Movimiento;
 import com.prueba_gco.prueba_gco.domain.model.Producto;
 import com.prueba_gco.prueba_gco.domain.ports.out.ProductoRepository;
 import org.springframework.stereotype.Repository;
@@ -69,6 +70,7 @@ public class ProductoAdapter implements ProductoRepository {
         productoEntity.setPrecio(producto.getPrecio());
         productoEntity.setCodigo(producto.getCodigo());
         productoEntity.setCategoriaId(producto.getCategoriaId());
+        productoEntity.setStock(producto.getStock());
         ProductoEntity productoActualizado=  productoJpaRepo.save(productoEntity);
         return this.toDomain(productoActualizado);
     }

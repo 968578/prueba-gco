@@ -1,15 +1,34 @@
-package com.prueba_gco.prueba_gco.domain.model;
+package com.prueba_gco.prueba_gco.infraestructure.persistence.movimiento;
 
-import lombok.Data;
+import jakarta.persistence.*;
 
-@Data
-public class Movimiento {
+@Entity
+@Table(name = "movimientos")
+public class MovimientoEntity {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private Long productoId;
     private Integer tipo;
     private Integer cantidad;
+
+    @Column(name = "fecha_creacion")
     private String fechaCreacion;
+
     private String descripcion;
+
+    public MovimientoEntity() {}
+
+    public MovimientoEntity(Long id, Long productoId, Integer tipo, Integer cantidad, String fechaCreacion, String descripcion) {
+        this.id = id;
+        this.productoId = productoId;
+        this.tipo = tipo;
+        this.cantidad = cantidad;
+        this.fechaCreacion = fechaCreacion;
+        this.descripcion = descripcion;
+    }
 
     public Long getId() {
         return id;

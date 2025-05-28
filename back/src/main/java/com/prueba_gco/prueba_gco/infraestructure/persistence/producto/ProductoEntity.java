@@ -1,8 +1,7 @@
-package com.prueba_gco.prueba_gco.infraestructure.persistence;
+package com.prueba_gco.prueba_gco.infraestructure.persistence.producto;
 
 
 import jakarta.persistence.*;
-import lombok.Data;
 
 
 @Entity
@@ -17,7 +16,10 @@ class ProductoEntity {
     private Integer precio;
     private Integer stock;
     private String codigo;
+
+    @Column(name = "fecha_creacion")
     private String fechaCreacion;
+
     private Long categoriaId;
 
     public ProductoEntity(Integer stock, Long id, String nombre, String descripcion, Integer estado, Integer precio, String codigo, String fechaCreacion, Long categoriaId) {

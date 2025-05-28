@@ -1,5 +1,6 @@
 package com.prueba_gco.prueba_gco.infraestructure.web;
 
+import com.prueba_gco.prueba_gco.domain.model.Movimiento;
 import com.prueba_gco.prueba_gco.domain.model.Producto;
 import com.prueba_gco.prueba_gco.domain.ports.in.ProductoUseCase;
 import org.springframework.http.ResponseEntity;
@@ -19,8 +20,6 @@ public class ProductoController {
 
     @PostMapping
     public ResponseEntity<Producto> crearProducto(@RequestBody Producto producto){
-        System.out.println("aqui imprime el producto");
-        System.out.println(producto);
         Producto productoCreado = productoUseCase.crearProducto(producto);
         return ResponseEntity.ok(productoCreado);
     }

@@ -1,5 +1,6 @@
 package com.prueba_gco.prueba_gco.domain.ports.in;
 
+import com.prueba_gco.prueba_gco.domain.model.Movimiento;
 import com.prueba_gco.prueba_gco.domain.model.Producto;
 
 import java.util.List;
@@ -11,4 +12,6 @@ public interface ProductoUseCase {
     Optional<Producto> buscarProductoPorId(Long id);
     Producto actualizarProducto(Producto producto);
     void eliminarProducto(Long id);
+    Producto actualizarStock(Movimiento movimiento);
+
 }
