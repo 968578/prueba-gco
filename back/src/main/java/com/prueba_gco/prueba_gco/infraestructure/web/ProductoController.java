@@ -2,6 +2,7 @@ package com.prueba_gco.prueba_gco.infraestructure.web;
 
 import com.prueba_gco.prueba_gco.domain.model.Movimiento;
 import com.prueba_gco.prueba_gco.domain.model.Producto;
+import com.prueba_gco.prueba_gco.domain.model.filtro.ProductoFiltro;
 import com.prueba_gco.prueba_gco.domain.ports.in.ProductoUseCase;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,9 +25,9 @@ public class ProductoController {
         return ResponseEntity.ok(productoCreado);
     }
 
-    @GetMapping
-    public ResponseEntity<List<Producto>> consultarProductos(){
-        List<Producto> productos =  productoUseCase.listarProductos();
+    @PostMapping("/buscar")
+    public ResponseEntity<List<Producto>> consultarProductos(@RequestBody ProductoFiltro productoFiltro){
+        List<Producto> productos =  productoUseCase.listarProductosFiltro(productoFiltro);
         return ResponseEntity.ok(productos);
     }
 

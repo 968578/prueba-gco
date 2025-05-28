@@ -20,6 +20,7 @@ class ProductoEntity {
     @Column(name = "fecha_creacion")
     private String fechaCreacion;
 
+    @Column(name = "categoria_id")
     private Long categoriaId;
 
     public ProductoEntity(Integer stock, Long id, String nombre, String descripcion, Integer estado, Integer precio, String codigo, String fechaCreacion, Long categoriaId) {

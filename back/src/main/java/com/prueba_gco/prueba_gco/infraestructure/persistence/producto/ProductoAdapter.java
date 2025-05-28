@@ -2,6 +2,7 @@ package com.prueba_gco.prueba_gco.infraestructure.persistence.producto;
 
 import com.prueba_gco.prueba_gco.domain.model.Movimiento;
 import com.prueba_gco.prueba_gco.domain.model.Producto;
+import com.prueba_gco.prueba_gco.domain.model.filtro.ProductoFiltro;
 import com.prueba_gco.prueba_gco.domain.ports.out.ProductoRepository;
 import org.springframework.stereotype.Repository;
 
@@ -77,5 +78,13 @@ public class ProductoAdapter implements ProductoRepository {
 
     public void eliminar(Long id){
         productoJpaRepo.deleteById(id);
+    }
+
+    @Override
+    public List<Producto> listarFiltro(ProductoFiltro productoFiltro) {
+        List<ProductoEntity> productosEntities = productoJpaRepo.findAll(ProductoSpecification.crearFiltro(productoFiltro));
+        return productosEntities.stream()
+                .map(this::toDomain).
+                toList();
     }
 }

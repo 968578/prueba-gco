@@ -2,6 +2,7 @@ package com.prueba_gco.prueba_gco.application.service;
 
 import com.prueba_gco.prueba_gco.domain.model.Movimiento;
 import com.prueba_gco.prueba_gco.domain.model.Producto;
+import com.prueba_gco.prueba_gco.domain.model.filtro.ProductoFiltro;
 import com.prueba_gco.prueba_gco.domain.ports.in.ProductoUseCase;
 import com.prueba_gco.prueba_gco.domain.ports.out.ProductoRepository;
 import org.springframework.stereotype.Service;
@@ -29,8 +30,8 @@ public class ProductoService implements ProductoUseCase {
     }
 
     @Override
-    public List<Producto> listarProductos() {
-        return productoRepo.listar();
+    public List<Producto> listarProductosFiltro(ProductoFiltro productoFiltro) {
+        return productoRepo.listarFiltro(productoFiltro);
     }
 
     @Override
