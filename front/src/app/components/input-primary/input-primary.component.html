@@ -5,6 +5,7 @@
   [disabled]="disabled"
   (input)="updateValue($event)"
   (blur)="onTouched()"
-  class="w-full border-0 border-b border-gray-300 focus:border-blue-500 focus:ring-0 focus:outline-none"
+  [ngClass]="{'border-dashed border-gray-300': disabled}"
+  class="w-full border-b border-gray-400 focus:border-blue-500 focus:ring-0 focus:outline-none"
   
 />  
