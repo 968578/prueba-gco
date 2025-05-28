@@ -37,4 +37,6 @@ public class ProductoService implements ProductoUseCase {
     @Override
     public Producto actualizarProducto(Producto producto){return productoRepo.actualizar(producto);}
 
+    @Override
+    public void eliminarProducto(Long id){productoRepo.eliminar(id);}
 }

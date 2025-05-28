@@ -43,4 +43,10 @@ public class ProductoController {
         Producto productoActualizado = productoUseCase.actualizarProducto(producto);
         return ResponseEntity.ok(productoActualizado);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> eliminarProducto(@PathVariable Long id){
+        productoUseCase.eliminarProducto(id);
+        return ResponseEntity.ok().build();
+    }
 }

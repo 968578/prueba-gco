@@ -10,4 +10,5 @@ public interface ProductoRepository {
     List<Producto> listar();
     Optional<Producto> buscarPorId(Long id);
     Producto actualizar(Producto producto);
+    void eliminar(Long id);
 }

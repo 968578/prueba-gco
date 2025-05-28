@@ -73,7 +73,7 @@ public class ProductoAdapter implements ProductoRepository {
         return this.toDomain(productoActualizado);
     }
 
-
-
-
+    public void eliminar(Long id){
+        productoJpaRepo.deleteById(id);
+    }
 }
