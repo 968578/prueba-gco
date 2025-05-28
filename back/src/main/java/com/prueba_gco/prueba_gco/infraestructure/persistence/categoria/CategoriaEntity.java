@@ -1,6 +1,12 @@
-package com.prueba_gco.prueba_gco.domain.model;
+package com.prueba_gco.prueba_gco.infraestructure.persistence.categoria;
 
-public class Categoria {
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "categorias")
+public class CategoriaEntity {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nombre;
 
