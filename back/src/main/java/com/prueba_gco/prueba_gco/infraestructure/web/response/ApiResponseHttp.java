@@ -6,11 +6,11 @@ import org.springframework.validation.FieldError;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class ApiResponse<T> {
+public class ApiResponseHttp<T> {
     private String name;
     private T data;
 
-    public ApiResponse(String name, T data) {
+    public ApiResponseHttp(String name, T data) {
         this.name = name;
         this.data = data;
     }
@@ -25,9 +25,9 @@ public class ApiResponse<T> {
                 ));
     }
 
-    public static <T> ApiResponse<T> error(BindingResult resultValidation) {
+    public static <T> ApiResponseHttp<T> error(BindingResult resultValidation) {
         Map<String, String> errores = obtenerErrores(resultValidation);
-        return new ApiResponse<>("error", (T) errores);
+        return new ApiResponseHttp<>("error", (T) errores);
     }
 
 
