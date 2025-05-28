@@ -26,4 +26,7 @@ export class MovimientoService {
   creaMovimiento(movimiento: Movimiento): Observable<Movimiento> {
       return this.http.post<Movimiento>(this.apiUrl, movimiento);
   }
+  obtenerMovimientosProProducto(idProducto: string): Observable<Movimiento[]>{
+    return this.http.get<Movimiento[]>(`${this.apiUrl}/${idProducto}`)
+  } 
 }

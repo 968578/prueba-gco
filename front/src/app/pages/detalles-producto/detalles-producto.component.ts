@@ -9,6 +9,8 @@ import { ErrorFormComponent } from "../../components/error-form/error-form.compo
 import { InputPrimaryComponent } from "../../components/input-primary/input-primary.component";
 import { CustomValidators } from '../../shared/validators';
 import { ModalMovimientosComponent } from "../../components/modal-movimientos/modal-movimientos.component";
+import { Movimiento } from '../../models/models';
+import { MovimientoService } from '../../service/movimiento.service';
 
 @Component({
   selector: 'app-detalles-producto',
@@ -17,10 +19,12 @@ import { ModalMovimientosComponent } from "../../components/modal-movimientos/mo
   styleUrl: './detalles-producto.component.css'
 })
 export class DetallesProductoComponent implements OnInit {
-  mostrarModal = true;
+  movimientos!: Movimiento[];
+  mostrarModal = false;
   constructor(
     private productosService: ProductoService,
-    private route : ActivatedRoute
+    private route : ActivatedRoute,
+    private movimientosService : MovimientoService
   ) {}
   
   productoForm = new FormGroup({
@@ -36,9 +40,23 @@ export class DetallesProductoComponent implements OnInit {
     
 
   ngOnInit(): void {
-    this.productosService.obtenerProductoPorId(this.route.snapshot.paramMap.get("id")).subscribe((data: any) =>{
+       const idProducto = String(this.route.snapshot.paramMap.get("id"))
+    
+    this.productosService.obtenerProductoPorId(idProducto).subscribe((data: any) =>{
       this.productoForm.patchValue(data)
       this.productoForm.disable()
+    });
+
+    this.movimientosService.obtenerMovimientosProProducto(idProducto).subscribe({
+      next:(data)=>{
+        this.movimientos = data;
+        console.log("movimientos producto");
+        console.log(data)
+      },
+      error: (err)=>{
+        console.log("Error");
+        console.log(err);
+      }
     })
   }
 

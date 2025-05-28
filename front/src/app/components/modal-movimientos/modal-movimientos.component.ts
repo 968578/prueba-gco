@@ -18,6 +18,7 @@ export class ModalMovimientosComponent {
 
   @Input() mostrarModal = true;
   @Output() ocultarModal = new EventEmitter<boolean>();
+  @Output() recargarComponente = new EventEmitter();
 
   constructor(
     private movimientoService: MovimientoService,
@@ -50,6 +51,7 @@ export class ModalMovimientosComponent {
             descripcion: ""
           });
           this.cerrarModal();
+          this.recargarComponente.emit();
 
         },
         error:(err) =>{
