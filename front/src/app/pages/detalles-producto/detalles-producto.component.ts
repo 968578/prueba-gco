@@ -63,6 +63,15 @@ export class DetallesProductoComponent implements OnInit {
     }
   }
 
+  eliminar(){
+    console.log("elimnando este producto")
+    const idProducto = String(this.route.snapshot.paramMap.get("id"));
+    this.productosService.eliminarProducto(idProducto).subscribe((data) =>{
+      console.log("respuesta eliminacion-->");
+      console.log(data);
+    })
+  }
+
 
   validateNumber(inp :AbstractControl): ValidationErrors | null {
     return isNaN(inp.value) ? { notNumber: true } : null;
