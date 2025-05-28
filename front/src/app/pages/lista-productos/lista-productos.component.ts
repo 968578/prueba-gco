@@ -3,10 +3,11 @@ import { ProductoService } from '../../service/producto.service';
 import { Producto } from '../../models/models';
 import { HeaderComponent } from "../../components/header/header.component";
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-lista-productos',
-  imports: [HeaderComponent, CommonModule],
+  imports: [HeaderComponent, CommonModule, RouterLink],
   templateUrl: './lista-productos.component.html',
   styleUrl: './lista-productos.component.css'
 })
@@ -20,8 +21,6 @@ export class ListaProductosComponent {
     try {
       this.productosService.obtenerProductos().subscribe(data => {
         this.productos = data;
-        console.log("data->");
-        console.log(data);
       });
       
     } catch (error) {

@@ -13,12 +13,17 @@ export class ProductoService {
   constructor(private http: HttpClient) { }
 
   
-    obtenerProductos(): Observable<Producto[]> {
+  obtenerProductos(): Observable<Producto[]> {
     return this.http.get<Producto[]>(this.apiUrl);
   }
 
-  crearProducto(producto: Producto): Observable<ResponseApi> {
-    return this.http.post<ResponseApi>(this.apiUrl, producto);
+  crearProducto(producto: Producto): Observable<Producto> {
+    return this.http.post<Producto>(this.apiUrl, producto);
+  }
+
+  obtenerProductoPorId(id: string | null): Observable<Producto>{
+    return this.http.get<Producto>(`${this.apiUrl}/${id}`, { 
+    })
   }
 
 }
