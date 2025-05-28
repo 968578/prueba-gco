@@ -7,6 +7,7 @@ import { ErrorFormComponent } from "../../components/error-form/error-form.compo
 import { CommonModule } from '@angular/common';
 import { ProductoService } from '../../service/producto.service';
 import { Producto } from '../../models/models';
+import { CustomValidators } from '../../shared/validators';
 
 @Component({
   selector: 'app-formulario-productos',
@@ -22,8 +23,8 @@ export class FormularioProductosComponent implements OnInit {
     nombre: new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(45)]),
     descripcion: new FormControl('', Validators.maxLength(200)),
     estado: new FormControl('', Validators.required),
-    precio: new FormControl(0, [Validators.required, Validators.min(0), (inp)=>this.validateNumber(inp)]),
-    stock: new FormControl(0,  [Validators.required,  Validators.min(0), (inp)=>this.validateNumber(inp)]),
+    precio: new FormControl(0, [Validators.required, Validators.min(0), (inp)=>CustomValidators.validateNumber(inp)]),
+    stock: new FormControl(0,  [Validators.required,  Validators.min(0), (inp)=>CustomValidators.validateNumber(inp)]),
     codigo: new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(20)]),
     categoriaId: new FormControl('', Validators.required),
   })
@@ -32,8 +33,7 @@ export class FormularioProductosComponent implements OnInit {
     if(this.productoForm.invalid){
       return;
     }
-    
-    
+
     const formValue = this.productoForm.value
     const productoModel = this.productosService.mapearProducto(formValue);
       
@@ -51,10 +51,6 @@ export class FormularioProductosComponent implements OnInit {
   });
 
     
-  }
-
-  validateNumber(inp :AbstractControl): ValidationErrors | null {
-    return isNaN(inp.value) ? { notNumber: true } : null;
   }
 
   ngOnInit(): void {
