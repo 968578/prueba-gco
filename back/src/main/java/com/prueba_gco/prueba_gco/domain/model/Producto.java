@@ -1,15 +1,39 @@
 package com.prueba_gco.prueba_gco.domain.model;
 
 
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+
 public class Producto {
+
     private Long id;
+
+    @NotNull(message = "No puede ser null")
+    @Size(max = 45, message = "No puede superar 45 caracteres")
     private String nombre;
+
+    @Size(max = 200, message = "No puede superar 200 caracteres")
     private String descripcion;
+
+    @NotNull(message = "No puede ser null")
+    @Min(value = 0, message = "El valor mínimo es 0")
+    @Max(value = 1, message = "El valor máximo es 1")
     private Integer estado;
+
     private Integer precio;
+
+    @NotNull(message = "No puede ser null")
     private Integer stock;
+
+    @NotNull(message = "No puede ser null")
+    @Size(max = 20, message = "No puede superar 20 caracteres")
     private String codigo;
+
     private String fechaCreacion;
+
+    @NotNull(message = "No puede ser null")
     private Long categoriaId;
 
     public Producto(Integer stock, Long id, String nombre, String descripcion, Integer estado, Integer precio, String codigo, String fechaCreacion, Long categoriaId) {

@@ -1,14 +1,28 @@
 package com.prueba_gco.prueba_gco.domain.model;
 
-import lombok.Data;
 
-@Data
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
+
 public class Movimiento {
+
     private Long id;
+
+    @NotNull(message = "No puede ser null")
     private Long productoId;
+
+    @NotNull(message = "No puede ser null")
+    @Min(value = 1, message = "El valor mínimo es 1")
+    @Max(value = 2, message = "El valor máximo es 2")
     private Integer tipo;
+
+    @NotNull(message = "No puede ser null")
+    @Min(value = 1, message = "El valor mínimo es 1")
     private Integer cantidad;
+
     private String fechaCreacion;
+
     private String descripcion;
 
     public Long getId() {
