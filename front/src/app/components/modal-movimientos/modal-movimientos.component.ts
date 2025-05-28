@@ -5,6 +5,8 @@ import { CommonModule } from '@angular/common';
 import { InputPrimaryComponent } from "../input-primary/input-primary.component";
 import { LabelPrimaryComponent } from "../label-primary/label-primary.component";
 import { ErrorFormComponent } from "../error-form/error-form.component";
+import { ActivatedRoute } from '@angular/router';
+import { MovimientoService } from '../../service/movimiento.service';
 
 @Component({
   selector: 'modal-movimientos',
@@ -17,6 +19,11 @@ export class ModalMovimientosComponent {
   @Input() mostrarModal = true;
   @Output() ocultarModal = new EventEmitter<boolean>();
 
+  constructor(
+    private movimientoService: MovimientoService,
+    private route : ActivatedRoute
+  ) {}
+
   movimientoForm = new FormGroup({
     productoId: new FormControl(""),
     tipo: new FormControl(1, Validators.required),
@@ -25,7 +32,31 @@ export class ModalMovimientosComponent {
   })
 
     guardar(){
-      console.log("guardando movimiento")
+      if(this.movimientoForm.invalid){
+        return
+      }
+      const idProducto = String(this.route.snapshot.paramMap.get("id"))
+      this.movimientoForm.patchValue({productoId: idProducto});
+      
+      const movimientoModel = this.movimientoService.mapearMovimiento(this.movimientoForm.value);
+      this.movimientoService.creaMovimiento(movimientoModel).subscribe({
+        next:(data)=>{
+          console.log("creacion movimiento");
+          console.log(data);
+          this.movimientoForm.reset({
+            productoId: "",
+            tipo: 1,
+            cantidad: "",
+            descripcion: ""
+          });
+          this.cerrarModal();
+
+        },
+        error:(err) =>{
+          console.log("error")
+          console.log(err)
+        }
+      })
   }
 
 

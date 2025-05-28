@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { HeaderComponent } from "../../components/header/header.component";
-import { Producto } from '../../models/models';
 import { ProductoService } from '../../service/producto.service';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { AbstractControl, FormControl, FormGroup, FormsModule, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
+import {  FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { LabelPrimaryComponent } from "../../components/label-primary/label-primary.component";
 import { ErrorFormComponent } from "../../components/error-form/error-form.component";
 import { InputPrimaryComponent } from "../../components/input-primary/input-primary.component";
@@ -60,7 +59,6 @@ export class DetallesProductoComponent implements OnInit {
   activarEdicion(){
     if(this.productoForm.disabled){
       this.productoForm.enable()
-      this.productoForm.get("stock")?.disable();
     } else{
       this.productoForm.disable()
     }

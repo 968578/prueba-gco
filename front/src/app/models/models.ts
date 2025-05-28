@@ -17,11 +17,11 @@ export interface Producto {
 }
 
 export interface Movimiento {
-  id: number;
+  id?: number;
   productoId: number;
   tipo: number;
   cantidad: number;
-  fecha: string;
+  fechaCreacion?: string;
   descripcion: string;
 }
 
