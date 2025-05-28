@@ -25,6 +25,12 @@ export interface Movimiento {
   descripcion: string;
 }
 
+export interface FiltroProducto{
+  nombre: string;
+  codigo: string;
+  categoriaId: number;
+}
+
 
 export interface ResponseApi{
   name: string;

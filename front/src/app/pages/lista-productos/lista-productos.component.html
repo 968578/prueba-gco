@@ -1,6 +1,32 @@
 <app-header></app-header>
 <div class="p-6 bg-white rounded-lg shadow-md">
   <h2 class="text-2xl font-semibold mb-4 text-gray-800">Lista de Productos</h2>
+
+  <!-- Filtros -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+  <input type="text"
+         placeholder="Buscar por nombre"
+         [(ngModel)]="filtro.nombre"
+         class="border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400" />
+
+  <input type="text"
+         placeholder="Buscar por código"
+         [(ngModel)]="filtro.codigo"
+         class="border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400" />
+
+  <input type="number"
+         placeholder="Buscar por categoría ID"
+         [(ngModel)]="filtro.categoriaId"
+         class="border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400" />
+
+  <button (click)="buscarProductos()"
+          class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition">
+    Buscar
+  </button>
+</div>
+
+
+  <!-- Tabla -->
   <table class="w-full divide-gray-300 shadow-md border border-gray-100">
     <thead class="bg-gray-100">
       <tr>
@@ -17,7 +43,9 @@
     <tbody class="bg-white divide-y divide-gray-200">
       <tr *ngFor="let producto of productos" class="hover:bg-gray-100">
         <td class="px-6 py-4 w-18 text-sm text-gray-900">{{ producto.id }}</td>
-        <td class="px-6 py-4  text-sm text-gray-900 hover:text-red-600"><a routerLink="producto/{{producto.id}}">{{ producto.nombre }}</a></td>
+        <td class="px-6 py-4  text-sm text-gray-900 hover:text-red-600">
+          <a routerLink="producto/{{producto.id}}">{{ producto.nombre }}</a>
+        </td>
         <td class="px-6 py-4 w-56 text-sm text-gray-900">{{ producto.descripcion }}</td>
         <td class="px-6 py-4  text-sm text-gray-900">
           {{ producto.estado === 1 ? 'Activo' : 'Inactivo' }}

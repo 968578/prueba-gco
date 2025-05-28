@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Producto, ResponseApi } from '../models/models';
+import { FiltroProducto, Producto, ResponseApi } from '../models/models';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
@@ -26,8 +26,8 @@ export class ProductoService {
     return productoModel;
   }
   
-  obtenerProductos(): Observable<Producto[]> {
-    return this.http.get<Producto[]>(this.apiUrl);
+  obtenerProductos(filtroProducto: FiltroProducto): Observable<Producto[]> {
+    return this.http.post<Producto[]>(`${this.apiUrl}/buscar` , filtroProducto);
   }
 
   crearProducto(producto: Producto): Observable<Producto> {

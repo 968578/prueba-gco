@@ -21,7 +21,7 @@ public class ProductoSpecification {
                 predicates.add(cb.like(cb.lower(root.get("codigo")), "%"+ productoFiltro.getCodigo().toLowerCase()+ "%"));
             }
 
-            if(productoFiltro.getCategoriaId() != null ){
+            if(productoFiltro.getCategoriaId() != null && productoFiltro.getCategoriaId() > 0 ){
                 predicates.add(cb.equal(root.get("categoriaId"), productoFiltro.getCategoriaId()));
             }
             return cb.and(predicates.toArray(new Predicate[0]));
