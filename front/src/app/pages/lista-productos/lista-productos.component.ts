@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { ProductoService } from '../../service/producto.service';
-import { Producto } from '../../models/models';
+import { Categoria, Producto } from '../../models/models';
 import { HeaderComponent } from "../../components/header/header.component";
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CategoriaService } from '../../service/categoria.service';
 
 @Component({
   selector: 'app-lista-productos',
@@ -21,11 +22,16 @@ export class ListaProductosComponent {
 };
 
   productos: Producto[] = []
+  categorias: Categoria[] = []
 
-  constructor(private productosService: ProductoService) {}
+  constructor(
+    private productosService: ProductoService,
+    private categoriasService: CategoriaService
+  ) {}
 
   ngOnInit(): void {
     this.buscarProductos();
+    this.buscarCategorias();
   }
 
   buscarProductos() {
@@ -39,4 +45,17 @@ export class ListaProductosComponent {
       // aqui se debe agregar un erro manejado.
     }
   }
+
+  buscarCategorias(){
+    this.categoriasService.obtenerMovimientosProProducto().subscribe({
+      next: (data)=>{
+        this.categorias = data;
+      },
+      error: (err) =>{
+        console.log("error")
+        console.log(err)
+      }
+    })
+  }
+
 }

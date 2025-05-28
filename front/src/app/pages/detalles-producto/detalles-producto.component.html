@@ -86,8 +86,9 @@
 
         >
         <option value="">--Seleccione--</option>
-        <option value="1">Categoría 1</option>
-        <option value="2">Categoría 2</option>
+          <option *ngFor="let categoria of categorias" [value]="categoria.id">
+            {{ categoria.nombre }}
+          </option>
       </select>
       <error-form *ngIf="productoForm.get('categoriaId')?.errors?.['required'] && productoForm.get('categoriaId')?.dirty" [error]="'Es requerido'" />
     </div>

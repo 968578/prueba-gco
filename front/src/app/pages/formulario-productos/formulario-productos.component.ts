@@ -6,8 +6,9 @@ import { InputPrimaryComponent } from "../../components/input-primary/input-prim
 import { ErrorFormComponent } from "../../components/error-form/error-form.component";
 import { CommonModule } from '@angular/common';
 import { ProductoService } from '../../service/producto.service';
-import { Producto } from '../../models/models';
+import { Categoria, Producto } from '../../models/models';
 import { CustomValidators } from '../../shared/validators';
+import { CategoriaService } from '../../service/categoria.service';
 
 @Component({
   selector: 'app-formulario-productos',
@@ -16,8 +17,13 @@ import { CustomValidators } from '../../shared/validators';
   styleUrl: './formulario-productos.component.css'
 })
 export class FormularioProductosComponent implements OnInit {
+    
+  categorias: Categoria[] = []
   
-  constructor(private productosService: ProductoService) {}
+    constructor(
+    private productosService: ProductoService,
+    private categoriasService: CategoriaService   
+  ) {}
   
   productoForm = new FormGroup({
     nombre: new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(45)]),
@@ -28,6 +34,18 @@ export class FormularioProductosComponent implements OnInit {
     codigo: new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(20)]),
     categoriaId: new FormControl('', Validators.required),
   })
+
+  ngOnInit(): void {
+    this.categoriasService.obtenerMovimientosProProducto().subscribe({
+      next: (data)=>{
+        this.categorias = data;
+      },
+      error: (err) =>{
+        console.log("error")
+        console.log(err)
+      }
+    })
+  }
 
   submitProducto(){
     if(this.productoForm.invalid){
@@ -49,10 +67,6 @@ export class FormularioProductosComponent implements OnInit {
       console.log(err);
     }
   });
-
-    
   }
 
-  ngOnInit(): void {
-  }
 }

@@ -9,8 +9,9 @@ import { ErrorFormComponent } from "../../components/error-form/error-form.compo
 import { InputPrimaryComponent } from "../../components/input-primary/input-primary.component";
 import { CustomValidators } from '../../shared/validators';
 import { ModalMovimientosComponent } from "../../components/modal-movimientos/modal-movimientos.component";
-import { Movimiento } from '../../models/models';
+import { Categoria, Movimiento } from '../../models/models';
 import { MovimientoService } from '../../service/movimiento.service';
+import { CategoriaService } from '../../service/categoria.service';
 
 @Component({
   selector: 'app-detalles-producto',
@@ -20,11 +21,13 @@ import { MovimientoService } from '../../service/movimiento.service';
 })
 export class DetallesProductoComponent implements OnInit {
   movimientos!: Movimiento[];
+  categorias: Categoria[] = [];
   mostrarModal = false;
   constructor(
     private productosService: ProductoService,
     private route : ActivatedRoute,
-    private movimientosService : MovimientoService
+    private movimientosService : MovimientoService,
+    private categoriasService : CategoriaService
   ) {}
   
   productoForm = new FormGroup({
@@ -40,13 +43,35 @@ export class DetallesProductoComponent implements OnInit {
     
 
   ngOnInit(): void {
-       const idProducto = String(this.route.snapshot.paramMap.get("id"))
+    const idProducto = String(this.route.snapshot.paramMap.get("id"))
     
+    this.obtenerProducto(idProducto);
+    this.obtenerMovimientos(idProducto);
+    this.buscarCategorias();
+
+  }
+
+    buscarCategorias(){
+    this.categoriasService.obtenerMovimientosProProducto().subscribe({
+      next: (data)=>{
+        this.categorias = data;
+      },
+      error: (err) =>{
+        console.log("error")
+        console.log(err)
+      }
+    })
+  }
+
+
+  obtenerProducto(idProducto: string){
     this.productosService.obtenerProductoPorId(idProducto).subscribe((data: any) =>{
       this.productoForm.patchValue(data)
       this.productoForm.disable()
     });
+  }
 
+  obtenerMovimientos(idProducto: string){
     this.movimientosService.obtenerMovimientosProProducto(idProducto).subscribe({
       next:(data)=>{
         this.movimientos = data;

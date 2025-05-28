@@ -5,19 +5,24 @@
   <!-- Filtros -->
 <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
   <input type="text"
-         placeholder="Buscar por nombre"
-         [(ngModel)]="filtro.nombre"
-         class="border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400" />
+        placeholder="Buscar por nombre"
+        [(ngModel)]="filtro.nombre"
+        class="border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400" />
 
   <input type="text"
-         placeholder="Buscar por código"
-         [(ngModel)]="filtro.codigo"
-         class="border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400" />
+        placeholder="Buscar por código"
+        [(ngModel)]="filtro.codigo"
+        class="border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400" />
 
-  <input type="number"
-         placeholder="Buscar por categoría ID"
-         [(ngModel)]="filtro.categoriaId"
-         class="border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400" />
+  <select
+    [(ngModel)]="filtro.categoriaId"
+    class="border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+  >
+  <option value="0">-- Todas las categorías --</option>
+  <option *ngFor="let categoria of categorias" [value]="categoria.id">
+    {{ categoria.nombre }}
+  </option>
+</select>
 
   <button (click)="buscarProductos()"
           class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition">

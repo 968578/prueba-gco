@@ -102,9 +102,10 @@
           class="w-full border-0 border-b border-gray-300 focus:border-blue-500 focus:ring-0 focus:outline-none"
         >
           <option value="">--Seleccione--</option>
-          <option value="1">Categoria 1</option>
-          <option value="2">Categoria 2</option>
-        </select>
+          <option *ngFor="let categoria of categorias" [value]="categoria.id">
+            {{ categoria.nombre }}
+          </option>
+        </select>  
         <error-form *ngIf="productoForm.get('categoriaId')?.errors?.['required'] && productoForm.get('categoriaId')?.touched" 
           [error]="'Es requerido'" 
         />
