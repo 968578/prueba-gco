@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Categoria } from '../models/models';
+import { Categoria, ResponseApi } from '../models/models';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -12,7 +12,7 @@ export class CategoriaService {
   
   constructor(private http : HttpClient) { }
 
-  obtenerMovimientosProProducto(): Observable<Categoria[]>{
-    return this.http.get<Categoria[]>(this.apiUrl)
+  obtenerCategorias(): Observable<ResponseApi>{
+    return this.http.get<ResponseApi>(this.apiUrl)
   } 
 }

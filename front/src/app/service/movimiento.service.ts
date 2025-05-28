@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Movimiento } from '../models/models';
+import { Movimiento, ResponseApi } from '../models/models';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class MovimientoService {
 
-  private apiUrl = "http://localhost:8080/movimientos";
+  private apiUrl = "http://localhost:8080/movimientos1";
   
   constructor(private http : HttpClient) { }
 
@@ -23,10 +23,10 @@ export class MovimientoService {
     return movimientoModel;
   }
 
-  creaMovimiento(movimiento: Movimiento): Observable<Movimiento> {
-      return this.http.post<Movimiento>(this.apiUrl, movimiento);
+  creaMovimiento(movimiento: Movimiento): Observable<ResponseApi> {
+      return this.http.post<ResponseApi>(this.apiUrl, movimiento);
   }
-  obtenerMovimientosProProducto(idProducto: string): Observable<Movimiento[]>{
-    return this.http.get<Movimiento[]>(`${this.apiUrl}/${idProducto}`)
+  obtenerMovimientosProProducto(idProducto: string): Observable<ResponseApi>{
+    return this.http.get<ResponseApi>(`${this.apiUrl}/${idProducto}`)
   } 
 }

@@ -7,6 +7,8 @@ import { LabelPrimaryComponent } from "../label-primary/label-primary.component"
 import { ErrorFormComponent } from "../error-form/error-form.component";
 import { ActivatedRoute } from '@angular/router';
 import { MovimientoService } from '../../service/movimiento.service';
+import { ResponseApi } from '../../models/models';
+import { HandlerResponse } from '../../shared/handler';
 
 @Component({
   selector: 'modal-movimientos',
@@ -22,7 +24,8 @@ export class ModalMovimientosComponent {
 
   constructor(
     private movimientoService: MovimientoService,
-    private route : ActivatedRoute
+    private route : ActivatedRoute,
+    private handler: HandlerResponse,
   ) {}
 
   movimientoForm = new FormGroup({
@@ -41,22 +44,27 @@ export class ModalMovimientosComponent {
       
       const movimientoModel = this.movimientoService.mapearMovimiento(this.movimientoForm.value);
       this.movimientoService.creaMovimiento(movimientoModel).subscribe({
-        next:(data)=>{
-          console.log("creacion movimiento");
-          console.log(data);
-          this.movimientoForm.reset({
-            productoId: "",
-            tipo: 1,
-            cantidad: "",
-            descripcion: ""
-          });
-          this.cerrarModal();
-          this.recargarComponente.emit();
+        next: (res: ResponseApi)=>{
+        this.handler.manejaRespuestaGenerica(
+          res,
+          (d)=>{
+            this.movimientoForm.reset({
+              productoId: "",
+              tipo: 1,
+              cantidad: "",
+              descripcion: ""
+            });
+            this.cerrarModal();
+            this.recargarComponente.emit();
 
+          },
+          "Movimiento creado",
+          "Fallo al obtener categorias"
+        )  
         },
-        error:(err) =>{
-          console.log("error")
+        error:(err)=>{
           console.log(err)
+          this.handler.manejarError("Fallo al crear el movimiento")
         }
       })
   }

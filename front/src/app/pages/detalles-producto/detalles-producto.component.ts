@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HeaderComponent } from "../../components/header/header.component";
 import { ProductoService } from '../../service/producto.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import {  FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { LabelPrimaryComponent } from "../../components/label-primary/label-primary.component";
@@ -9,9 +9,10 @@ import { ErrorFormComponent } from "../../components/error-form/error-form.compo
 import { InputPrimaryComponent } from "../../components/input-primary/input-primary.component";
 import { CustomValidators } from '../../shared/validators';
 import { ModalMovimientosComponent } from "../../components/modal-movimientos/modal-movimientos.component";
-import { Categoria, Movimiento } from '../../models/models';
+import { Categoria, Movimiento, ResponseApi } from '../../models/models';
 import { MovimientoService } from '../../service/movimiento.service';
 import { CategoriaService } from '../../service/categoria.service';
+import { HandlerResponse } from '../../shared/handler';
 
 @Component({
   selector: 'app-detalles-producto',
@@ -27,7 +28,9 @@ export class DetallesProductoComponent implements OnInit {
     private productosService: ProductoService,
     private route : ActivatedRoute,
     private movimientosService : MovimientoService,
-    private categoriasService : CategoriaService
+    private categoriasService : CategoriaService,
+    private handler : HandlerResponse,
+    private router: Router
   ) {}
   
   productoForm = new FormGroup({
@@ -52,35 +55,60 @@ export class DetallesProductoComponent implements OnInit {
   }
 
     buscarCategorias(){
-    this.categoriasService.obtenerMovimientosProProducto().subscribe({
-      next: (data)=>{
-        this.categorias = data;
+    this.categoriasService.obtenerCategorias().subscribe({
+      next: (res: ResponseApi)=>{
+        this.handler.manejaRespuestaGenerica(
+          res,
+          (d)=>{
+            this.categorias = d;
+          },
+          "",
+          "Fallo al obtener categorias"
+        )  
       },
-      error: (err) =>{
-        console.log("error")
+      error:(err)=>{
         console.log(err)
+        this.handler.manejarError("Fallo al obtener categorias")
       }
     })
   }
 
 
   obtenerProducto(idProducto: string){
-    this.productosService.obtenerProductoPorId(idProducto).subscribe((data: any) =>{
-      this.productoForm.patchValue(data)
-      this.productoForm.disable()
-    });
-  }
+    this.productosService.obtenerProductoPorId(idProducto).subscribe({
+      next: (res: ResponseApi)=>{
+        this.handler.manejaRespuestaGenerica(
+          res,
+          (d)=>{
+            this.productoForm.patchValue(d)
+            this.productoForm.disable()
+          },
+          "",
+          "Fallo al obtener el producto"
+        )  
+      },
+      error:(err)=>{
+        console.log(err)
+        this.handler.manejarError("Fallo al obtener el producto")
+      }
+  })
+}
 
   obtenerMovimientos(idProducto: string){
     this.movimientosService.obtenerMovimientosProProducto(idProducto).subscribe({
-      next:(data)=>{
-        this.movimientos = data;
-        console.log("movimientos producto");
-        console.log(data)
+      next: (res: ResponseApi)=>{
+        this.handler.manejaRespuestaGenerica(
+          res,
+          (d)=>{
+            this.movimientos = d;
+          },
+          "",
+          "Fallo al obtener movimientos"
+        )  
       },
       error: (err)=>{
-        console.log("Error");
-        console.log(err);
+        console.log(err)
+        this.handler.manejarError("Fallo al obtener movimientos")
       }
     })
   }
@@ -91,10 +119,23 @@ export class DetallesProductoComponent implements OnInit {
     }
     const formValue = this.productoForm.value
     const producto = this.productosService.mapearProducto(formValue);
-    this.productosService.actualizarProducto(producto).subscribe((data: any) =>{
-      this.productoForm.patchValue(data)
-      this.productoForm.disable()
-      // agregar respuesta de ok.
+
+    this.productosService.actualizarProducto(producto).subscribe({
+      next: (res: ResponseApi)=>{
+        this.handler.manejaRespuestaGenerica(
+          res,
+          (d)=>{
+            this.productoForm.patchValue(d)
+            this.productoForm.disable()
+          },
+          "Actualizado",
+          "Fallo al actualizar el producto"
+        )
+      },
+      error: (err)=>{
+        console.log(err)
+        this.handler.manejarError("Fallo al actualizar el producto")
+      }
     })
 
   }
@@ -108,11 +149,21 @@ export class DetallesProductoComponent implements OnInit {
   }
 
   eliminar(){
-    console.log("elimnando este producto")
     const idProducto = String(this.route.snapshot.paramMap.get("id"));
-    this.productosService.eliminarProducto(idProducto).subscribe((data) =>{
-      console.log("respuesta eliminacion-->");
-      console.log(data);
+    this.productosService.eliminarProducto(idProducto).subscribe({
+      next:(res: ResponseApi)=>{
+        this.handler.manejaRespuestaGenerica(
+          res,
+          (d)=>{},
+          "Eliminado",
+          "Fallo al eliminar el producto"
+        )
+        this.router.navigate([""])
+      }, 
+      error: (err)=>{
+        console.log(err);
+        this.handler.manejarError("Fallo al eliminar el producto")
+      }
     })
   }
 

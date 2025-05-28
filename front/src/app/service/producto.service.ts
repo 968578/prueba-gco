@@ -26,25 +26,25 @@ export class ProductoService {
     return productoModel;
   }
   
-  obtenerProductos(filtroProducto: FiltroProducto): Observable<Producto[]> {
-    return this.http.post<Producto[]>(`${this.apiUrl}/buscar` , filtroProducto);
+  obtenerProductos(filtroProducto: FiltroProducto): Observable<ResponseApi> {
+    return this.http.post<ResponseApi>(`${this.apiUrl}/buscar` , filtroProducto);
   }
 
-  crearProducto(producto: Producto): Observable<Producto> {
-    return this.http.post<Producto>(this.apiUrl, producto);
+  crearProducto(producto: Producto): Observable<ResponseApi> {
+    return this.http.post<ResponseApi>(this.apiUrl, producto);
   }
 
-  obtenerProductoPorId(id: string): Observable<Producto>{
-    return this.http.get<Producto>(`${this.apiUrl}/${id}`, { 
+  obtenerProductoPorId(id: string): Observable<ResponseApi>{
+    return this.http.get<ResponseApi>(`${this.apiUrl}/${id}`, { 
     })
   }
 
-  actualizarProducto(producto: Producto): Observable<Producto> {
-    return this.http.put<Producto>(this.apiUrl, producto);
+  actualizarProducto(producto: Producto): Observable<ResponseApi> {
+    return this.http.put<ResponseApi>(this.apiUrl, producto);
   }
 
-  eliminarProducto(id: string): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/${id}`);
+  eliminarProducto(id: string): Observable<ResponseApi> {
+    return this.http.delete<ResponseApi>(`${this.apiUrl}/${id}`);
   }
 
 }

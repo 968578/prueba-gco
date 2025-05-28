@@ -32,6 +32,6 @@ export interface FiltroProducto{
 
 
 export interface ResponseApi{
-  name: string;
+  name: "ok" | "error";
   data: any;
 }

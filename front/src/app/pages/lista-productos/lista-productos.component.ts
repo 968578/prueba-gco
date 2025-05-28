@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { ProductoService } from '../../service/producto.service';
-import { Categoria, Producto } from '../../models/models';
+import { Categoria, Producto, ResponseApi } from '../../models/models';
 import { HeaderComponent } from "../../components/header/header.component";
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CategoriaService } from '../../service/categoria.service';
+import { HandlerResponse } from '../../shared/handler';
 
 @Component({
   selector: 'app-lista-productos',
@@ -26,7 +27,8 @@ export class ListaProductosComponent {
 
   constructor(
     private productosService: ProductoService,
-    private categoriasService: CategoriaService
+    private categoriasService: CategoriaService,
+    private handler : HandlerResponse,
   ) {}
 
   ngOnInit(): void {
@@ -35,25 +37,40 @@ export class ListaProductosComponent {
   }
 
   buscarProductos() {
-    try {
-      this.productosService.obtenerProductos(this.filtro).subscribe(data => {
-        this.productos = data;
-      });
-      
-    } catch (error) {
-      console.log(error)
-      // aqui se debe agregar un erro manejado.
-    }
+    
+      this.productosService.obtenerProductos(this.filtro).subscribe({
+        next:(data)=>{ 
+          this.handler.manejaRespuestaGenerica(
+            data,
+            (d)=>{
+              this.productos = d
+            },
+            "",
+            "Fallo al obtener los productos"
+          )
+        }, 
+        error: (err)=>{
+          console.log(err)
+          this.handler.manejarError("Fallo al obtener los productos")
+        }
+      })
   }
 
   buscarCategorias(){
-    this.categoriasService.obtenerMovimientosProProducto().subscribe({
-      next: (data)=>{
-        this.categorias = data;
+    this.categoriasService.obtenerCategorias().subscribe({
+      next: (res: ResponseApi)=>{
+        this.handler.manejaRespuestaGenerica(
+          res,
+          (d)=>{
+            this.categorias = d;
+          },
+          "",
+          "Fallo al obtener categorias"
+        )  
       },
-      error: (err) =>{
-        console.log("error")
+      error:(err)=>{
         console.log(err)
+        this.handler.manejarError("Fallo al obtener categorias")
       }
     })
   }

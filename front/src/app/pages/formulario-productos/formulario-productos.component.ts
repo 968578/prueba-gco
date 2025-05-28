@@ -6,9 +6,10 @@ import { InputPrimaryComponent } from "../../components/input-primary/input-prim
 import { ErrorFormComponent } from "../../components/error-form/error-form.component";
 import { CommonModule } from '@angular/common';
 import { ProductoService } from '../../service/producto.service';
-import { Categoria, Producto } from '../../models/models';
+import { Categoria, Producto, ResponseApi } from '../../models/models';
 import { CustomValidators } from '../../shared/validators';
 import { CategoriaService } from '../../service/categoria.service';
+import { HandlerResponse } from '../../shared/handler';
 
 @Component({
   selector: 'app-formulario-productos',
@@ -22,7 +23,8 @@ export class FormularioProductosComponent implements OnInit {
   
     constructor(
     private productosService: ProductoService,
-    private categoriasService: CategoriaService   
+    private categoriasService: CategoriaService,
+    private handler : HandlerResponse
   ) {}
   
   productoForm = new FormGroup({
@@ -36,13 +38,20 @@ export class FormularioProductosComponent implements OnInit {
   })
 
   ngOnInit(): void {
-    this.categoriasService.obtenerMovimientosProProducto().subscribe({
-      next: (data)=>{
-        this.categorias = data;
+    this.categoriasService.obtenerCategorias().subscribe({
+      next: (res: ResponseApi)=>{
+        this.handler.manejaRespuestaGenerica(
+          res,
+          (d)=>{
+            this.categorias = d;
+          },
+          "",
+          "Fallo al obtener categorias"
+        )  
       },
-      error: (err) =>{
-        console.log("error")
+      error:(err)=>{
         console.log(err)
+        this.handler.manejarError("Fallo al obtener categorias")
       }
     })
   }
@@ -56,15 +65,20 @@ export class FormularioProductosComponent implements OnInit {
     const productoModel = this.productosService.mapearProducto(formValue);
       
     this.productosService.crearProducto(productoModel).subscribe({
-    next: (res) => {
-      console.log('Producto creado con éxito:', res);
-      
-      this.productoForm.reset();
+    next: (res: ResponseApi) => {
+
+      this.handler.manejaRespuestaGenerica(
+        res,
+        ()=>{
+          this.productoForm.reset();
+        },
+        "Creado",
+        "Fallo al crear el producto"
+      )      
     },
     error: (err) => {
-      // debo agregar aqui un manjeador
-      console.log("Error")
-      console.log(err);
+      console.log(err)
+      this.handler.manejarError("Fallo al crear el producto")
     }
   });
   }
