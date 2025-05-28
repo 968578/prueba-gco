@@ -70,8 +70,8 @@ public class ProductoAdapter implements ProductoRepository {
         productoEntity.setStock(producto.getStock());
         productoEntity.setCodigo(producto.getCodigo());
         productoEntity.setCategoriaId(producto.getCategoriaId());
-        productoJpaRepo.save(productoEntity);
-        return producto;
+        ProductoEntity productoActualizado=  productoJpaRepo.save(productoEntity);
+        return this.toDomain(productoActualizado);
     }
 
 
