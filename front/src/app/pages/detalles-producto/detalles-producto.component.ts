@@ -19,6 +19,7 @@ export class DetallesProductoComponent implements OnInit {
   
 
   productoForm = new FormGroup({
+    id: new FormControl(''),
     nombre: new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(45)]),
     descripcion: new FormControl('', Validators.maxLength(200)),
     estado: new FormControl('', Validators.required),
@@ -42,17 +43,25 @@ export class DetallesProductoComponent implements OnInit {
   }
 
   actualizarProducto(){
+    
+    const formValue = this.productoForm.value
+    const producto = this.productosService.mapearProducto(formValue);
+    this.productosService.actualizarProducto(producto).subscribe((data: any) =>{
+      this.productoForm.patchValue(data)
+      this.productoForm.disable()
+      // agregar respuesta de ok.
+    })
 
   }
 
   activarEdicion(){
     if(this.productoForm.disabled){
       this.productoForm.enable()
+      this.productoForm.get("stock")?.disable();
     } else{
       this.productoForm.disable()
     }
   }
-
 
 
   validateNumber(inp :AbstractControl): ValidationErrors | null {

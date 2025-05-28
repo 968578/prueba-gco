@@ -33,17 +33,9 @@ export class FormularioProductosComponent implements OnInit {
       return;
     }
     
-    const formValue = this.productoForm.value;
     
-    const productoModel : Producto = {
-      nombre: String(formValue.nombre),
-      descripcion: String(formValue.descripcion),
-      estado: Number(formValue.estado),
-      precio: Number(formValue.precio),
-      stock: Number(formValue.stock),
-      codigo: String(formValue.codigo),
-      categoriaId: Number(formValue.categoriaId),
-    }
+    const formValue = this.productoForm.value
+    const productoModel = this.productosService.mapearProducto(formValue);
       
     this.productosService.crearProducto(productoModel).subscribe({
     next: (res) => {

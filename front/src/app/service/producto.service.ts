@@ -12,6 +12,19 @@ export class ProductoService {
   
   constructor(private http: HttpClient) { }
 
+  mapearProducto(formValue: any): Producto {
+    const productoModel : Producto = {
+      nombre: String(formValue.nombre),
+      descripcion: String(formValue.descripcion),
+      estado: Number(formValue.estado),
+      precio: Number(formValue.precio),
+      stock: Number(formValue.stock),
+      codigo: String(formValue.codigo),
+      categoriaId: Number(formValue.categoriaId),
+        ...(formValue.id && { id: Number(formValue.id) })
+    }
+    return productoModel;
+  }
   
   obtenerProductos(): Observable<Producto[]> {
     return this.http.get<Producto[]>(this.apiUrl);
@@ -24,6 +37,10 @@ export class ProductoService {
   obtenerProductoPorId(id: string | null): Observable<Producto>{
     return this.http.get<Producto>(`${this.apiUrl}/${id}`, { 
     })
+  }
+
+  actualizarProducto(producto: Producto): Observable<Producto> {
+    return this.http.put<Producto>(this.apiUrl, producto);
   }
 
 }

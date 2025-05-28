@@ -38,7 +38,7 @@ public class ProductoController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @PutMapping("/{id}")
+    @PutMapping
     public ResponseEntity<Producto> actualizarProducto(@RequestBody Producto producto){
         Producto productoActualizado = productoUseCase.actualizarProducto(producto);
         return ResponseEntity.ok(productoActualizado);

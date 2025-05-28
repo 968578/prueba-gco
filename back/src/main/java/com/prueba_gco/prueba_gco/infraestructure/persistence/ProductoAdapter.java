@@ -67,7 +67,6 @@ public class ProductoAdapter implements ProductoRepository {
         productoEntity.setDescripcion(producto.getDescripcion());
         productoEntity.setEstado(producto.getEstado());
         productoEntity.setPrecio(producto.getPrecio());
-        productoEntity.setStock(producto.getStock());
         productoEntity.setCodigo(producto.getCodigo());
         productoEntity.setCategoriaId(producto.getCategoriaId());
         ProductoEntity productoActualizado=  productoJpaRepo.save(productoEntity);
