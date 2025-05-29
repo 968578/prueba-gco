@@ -53,7 +53,7 @@ La aplicación está diseñada siguiendo los principios de la **arquitectura hex
   Implementa los adaptadores externos: controladores REST, repositorios JPA, mappers, clientes HTTP, etc. Esta capa se comunica con la capa de `application` para ejecutar los casos de uso.
 
 - **`config`**  
-  Contiene configuraciones generales como Swagger, CORS, configuración de base de datos, etc.
+  Contiene configuraciones generales como CORS.
 
 Este diseño mejora la mantenibilidad, facilita las pruebas unitarias y permite cambiar componentes tecnológicos sin afectar el núcleo del negocio.
 
