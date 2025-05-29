@@ -13,10 +13,9 @@ Esta es una aplicación desarrollada como parte de una prueba técnica. Permite 
 ## 🛠️ Tecnologías utilizadas
 
 - **Java** 21
-- **Spring Boot** (ver más abajo cómo verificar versión)
+- **Spring Boot**
 - **Maven** como gestor de dependencias
 - **MySQL** 8.0.3
-- **Docker / Docker Compose** (si estás usando contenedores para levantar la app y la base de datos)
 
 
 ---
@@ -26,25 +25,13 @@ Esta es una aplicación desarrollada como parte de una prueba técnica. Permite 
 ### 📂 Backend (Spring Boot)
 
 1. Asegúrate de tener **MySQL 8.0.3** instalado y corriendo localmente.
-2. Crea una base de datos con el nombre esperado por la aplicación (por ejemplo: `productos_db`).
+2. Crea una base de datos con el nombre esperado por la aplicación (por ejemplo: `prueba_gco`).
 3. Configura las credenciales de conexión a la base de datos en el archivo `src/main/resources/application.yml` o `application.properties`.
 
-   **Ejemplo de configuración (`application.yml`):**
-   ```yaml
-   spring:
-     datasource:
-       url: jdbc:mysql://localhost:3306/productos_db
-       username: root
-       password: tu_contraseña
-     jpa:
-       hibernate:
-         ddl-auto: update
-       show-sql: true
-   ```
 
 ### 🌐 Frontend (Angular)
 
-1. Navega al directorio del frontend (por ejemplo `./frontend`).
+1. Navega al directorio del frontend (por ejemplo `./front`).
 2. Instala las dependencias:
 
    ```bash
@@ -64,17 +51,6 @@ Esta es una aplicación desarrollada como parte de una prueba técnica. Permite 
 ## 🚀 Ejecución del Backend
 
 Desde el directorio raíz del proyecto backend (donde está el `pom.xml`), ejecuta:
-
-```bash
-./mvnw spring-boot:run
-```
-
-> En Windows:
-```bash
-mvnw.cmd spring-boot:run
-```
-
-O, si tienes Maven instalado globalmente:
 
 ```bash
 mvn spring-boot:run
