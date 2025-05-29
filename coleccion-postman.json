@@ -1,0 +1,627 @@
+{
+	"info": {
+		"_postman_id": "8c28320c-c161-4a7b-a4aa-ad9d9d0b850e",
+		"name": "Prueba_GCO",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18539124"
+	},
+	"item": [
+		{
+			"name": "Listar productos",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"nombre\": \"\",\r\n  \"codigo\": \"\",\r\n  \"categoriaId\": \"1\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/productos/buscar",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"productos",
+						"buscar"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "New Request",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nombre\": \"\",\r\n  \"codigo\": \"\",\r\n  \"categoriaId\": \"1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/productos/buscar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"productos",
+								"buscar"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Method"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Headers"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 29 May 2025 01:13:54 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"name\": \"ok\",\n    \"data\": [\n        {\n            \"stock\": 8,\n            \"id\": 11,\n            \"nombre\": \"Camiseta básica blanca\",\n            \"descripcion\": \"Camiseta de algodón cómoda y versátil\",\n            \"estado\": 1,\n            \"precio\": 10,\n            \"codigo\": \"CAM001\",\n            \"fechaCreacion\": \"2025-05-28 14:30:17\",\n            \"categoriaId\": 1\n        },\n        {\n            \"stock\": 80,\n            \"id\": 12,\n            \"nombre\": \"Camiseta azul con estampado\",\n            \"descripcion\": \"Diseño gráfico moderno y juvenil\",\n            \"estado\": 1,\n            \"precio\": 15,\n            \"codigo\": \"CAM002\",\n            \"fechaCreacion\": \"2025-05-28 14:30:17\",\n            \"categoriaId\": 1\n        },\n        {\n            \"stock\": 50,\n            \"id\": 13,\n            \"nombre\": \"Camiseta dry-fit deportiva\",\n            \"descripcion\": \"Perfecta para deporte, tela respirable\",\n            \"estado\": 1,\n            \"precio\": 20,\n            \"codigo\": \"CAM003\",\n            \"fechaCreacion\": \"2025-05-28 14:30:17\",\n            \"categoriaId\": 1\n        },\n        {\n            \"stock\": 70,\n            \"id\": 14,\n            \"nombre\": \"Camiseta rayas casual\",\n            \"descripcion\": \"Estilo informal para uso diario\",\n            \"estado\": 1,\n            \"precio\": 12,\n            \"codigo\": \"CAM004\",\n            \"fechaCreacion\": \"2025-05-28 14:30:17\",\n            \"categoriaId\": 1\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Crear productos",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"nombre\": \"camiseta 7\",\r\n\t\"descripcion\" : \"Es una camiseta muy regukar\",\r\n\t\"estado\": 1,\r\n\t\"precio\": 1200,\r\n\t\"stock\": 7,\r\n\t\"codigo\" : \"654yfytvywudbw\",\r\n\t\"fechaCreacion\": \"2025-05-25 00:00:00\",\r\n\t\"categoriaId\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/productos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"productos"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Listar productos Copy",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"nombre\": \"camiseta 7\",\r\n\t\"descripcion\" : \"Es una camiseta muy regukar\",\r\n\t\"estado\": 1,\r\n\t\"precio\": 1200,\r\n\t\"stock\": 7,\r\n\t\"codigo\" : \"654yfytvywudbw\",\r\n\t\"fechaCreacion\": \"2025-05-25 00:00:00\",\r\n\t\"categoriaId\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/productos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"productos"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Method"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Headers"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 29 May 2025 01:15:21 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"name\": \"ok\",\n    \"data\": {\n        \"stock\": 7,\n        \"id\": 38,\n        \"nombre\": \"camiseta 7\",\n        \"descripcion\": \"Es una camiseta muy regukar\",\n        \"estado\": 1,\n        \"precio\": 1200,\n        \"codigo\": \"654yfytvywudbw\",\n        \"fechaCreacion\": \"2025-05-25 00:00:00\",\n        \"categoriaId\": 1\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Actualizar productos",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"stock\": 9,\r\n\t\"id\": 15,\r\n\t\"nombre\": \"1 era camiseta\",\r\n\t\"descripcion\": \"Es una camiseta muy bonita\",\r\n\t\"estado\": 1,\r\n\t\"precio\": 1500,\r\n\t\"codigo\": \"123abc\",\r\n\t\"fechaCreacion\": \"2025-05-25 00:00:00\",\r\n\t\"categoriaId\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/productos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"productos"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Crear productos Copy",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"stock\": 9,\r\n\t\"id\": 15,\r\n\t\"nombre\": \"1 era camiseta\",\r\n\t\"descripcion\": \"Es una camiseta muy bonita\",\r\n\t\"estado\": 1,\r\n\t\"precio\": 1500,\r\n\t\"codigo\": \"123abc\",\r\n\t\"fechaCreacion\": \"2025-05-25 00:00:00\",\r\n\t\"categoriaId\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/productos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"productos"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Method"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Headers"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 29 May 2025 01:16:51 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"name\": \"ok\",\n    \"data\": {\n        \"stock\": 9,\n        \"id\": 15,\n        \"nombre\": \"1 era camiseta\",\n        \"descripcion\": \"Es una camiseta muy bonita\",\n        \"estado\": 1,\n        \"precio\": 1500,\n        \"codigo\": \"123abc\",\n        \"fechaCreacion\": \"2025-05-28 14:30:17\",\n        \"categoriaId\": 1\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Eliminar productos",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/productos/15",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"productos",
+						"15"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Actualizar productos Copy",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/productos/15",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"productos",
+								"15"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Method"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Headers"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 29 May 2025 01:17:27 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"name\": \"ok\",\n    \"data\": null\n}"
+				}
+			]
+		},
+		{
+			"name": "Crear movimientos",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"productoId\": 10,\r\n\t\"tipo\" : 1,\r\n\t\"cantidad\": 2,\r\n\t\"descripcion\": \"salida a bodega principal\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/movimientos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"movimientos"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Eliminar productos Copy",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"productoId\": 10,\r\n\t\"tipo\" : 1,\r\n\t\"cantidad\": 2,\r\n\t\"descripcion\": \"salida a bodega principal\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/movimientos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"movimientos"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Method"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Headers"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 29 May 2025 01:18:47 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"name\": \"ok\",\n    \"data\": {\n        \"id\": 24,\n        \"productoId\": 10,\n        \"tipo\": 1,\n        \"cantidad\": 2,\n        \"fechaCreacion\": \"2025-05-28T20:18:47.256910600\",\n        \"descripcion\": \"salida a bodega principal\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Listar movimientos de productos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/movimientos/10",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"movimientos",
+						"10"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Crear movimientos Copy",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/movimientos/10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"movimientos",
+								"10"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Method"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Headers"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 29 May 2025 01:19:37 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"name\": \"ok\",\n    \"data\": [\n        {\n            \"id\": 16,\n            \"productoId\": 10,\n            \"tipo\": 1,\n            \"cantidad\": 3,\n            \"fechaCreacion\": \"2025-05-28 11:25:32\",\n            \"descripcion\": \"dfdf\"\n        },\n        {\n            \"id\": 17,\n            \"productoId\": 10,\n            \"tipo\": 2,\n            \"cantidad\": 1,\n            \"fechaCreacion\": \"2025-05-28 11:39:27\",\n            \"descripcion\": \"prueba recarga pagina\"\n        },\n        {\n            \"id\": 18,\n            \"productoId\": 10,\n            \"tipo\": 1,\n            \"cantidad\": 2,\n            \"fechaCreacion\": \"2025-05-28 11:39:38\",\n            \"descripcion\": \"prueba recraga\"\n        },\n        {\n            \"id\": 19,\n            \"productoId\": 10,\n            \"tipo\": 2,\n            \"cantidad\": 1,\n            \"fechaCreacion\": \"2025-05-28 11:40:12\",\n            \"descripcion\": \"eedd\"\n        },\n        {\n            \"id\": 20,\n            \"productoId\": 10,\n            \"tipo\": 1,\n            \"cantidad\": 2,\n            \"fechaCreacion\": \"2025-05-28 16:32:17\",\n            \"descripcion\": \"salida a bodega principla\"\n        },\n        {\n            \"id\": 24,\n            \"productoId\": 10,\n            \"tipo\": 1,\n            \"cantidad\": 2,\n            \"fechaCreacion\": \"2025-05-28 20:18:47\",\n            \"descripcion\": \"salida a bodega principal\"\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Listar categorias",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/categorias",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"categorias"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Listar movimientos de productos Copy",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/categorias",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"categorias"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Method"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Headers"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 29 May 2025 01:20:08 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"name\": \"ok\",\n    \"data\": [\n        {\n            \"id\": 1,\n            \"nombre\": \"Camisetas\"\n        },\n        {\n            \"id\": 3,\n            \"nombre\": \"Chaquetas\"\n        },\n        {\n            \"id\": 2,\n            \"nombre\": \"Pantalones\"\n        },\n        {\n            \"id\": 4,\n            \"nombre\": \"Vestidos\"\n        },\n        {\n            \"id\": 5,\n            \"nombre\": \"Zapatos\"\n        }\n    ]\n}"
+				}
+			]
+		}
+	]
+}
