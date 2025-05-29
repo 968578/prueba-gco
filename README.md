@@ -26,27 +26,36 @@ La estructura de la aplicación sigue una arquitectura hexagonal, organizada de 
 ```
 📦 src
  └── 📦 main
-     ├── 📁 java
-     │    └── 📦 com.example.productos
-     │         ├── 📁 domain          # Entidades del dominio y casos de uso
-     │         │    ├── 📁 model      # Entidades del dominio (Producto, Movimiento, etc.)
-     │         │    └── 📁 usecase    # Casos de uso del negocio (crear, listar, actualizar, etc.)
-     │         ├── 📁 infrastructure  # Adaptadores externos: controladores REST, repositorios, etc.
-     │         └── 📁 config          # Configuraciones generales (Swagger, CORS, etc.)
-     └── 📁 resources
-          ├── application.yml        # Configuración de la app (base de datos, puertos, etc.)
-          └── data.sql               # (Opcional) Datos precargados
+     └── 📁 java
+          └── 📦 com.example.productos
+               ├── 📁 domain          # Entidades del dominio y casos de uso
+               │    ├── 📁 model      # Entidades del dominio (Producto, Movimiento, etc.)
+               │    └── 📁 usecase    # Casos de uso del negocio (crear, listar, actualizar, etc.)
+               ├── 📁 application     # Servicios de aplicación que orquestan los casos de uso
+               ├── 📁 infrastructure  # Adaptadores externos: controladores REST, repositorios, etc.
+               └── 📁 config          # Configuraciones generales (Swagger, CORS, etc.)
 ```
 
-### Estructura por capas
+### 🧱 Estructura por capas
 
-- **`domain.model`**: contiene las entidades del dominio (por ejemplo: `Producto`, `Movimiento`).
-- **`domain.usecase`**: implementa la lógica central del negocio y los casos de uso (crear producto, crear movimiento, etc.).
-- **`infrastructure`**: incluye los adaptadores externos como controladores REST, repositorios JPA, mappers, etc.
-- **`config`**: configuraciones de Swagger, conexión a base de datos, etc.
+La aplicación está diseñada siguiendo los principios de la **arquitectura hexagonal (Ports and Adapters)**, lo que permite una clara separación entre la lógica de negocio y los detalles de infraestructura.
 
-Este diseño sigue los principios de la **arquitectura hexagonal (Ports and Adapters)**, separando claramente el núcleo de la aplicación de los detalles de infraestructura.
+- **`domain.model`**  
+  Contiene las entidades del dominio (por ejemplo: `Producto`, `Movimiento`). Estas representan el núcleo del negocio y son independientes de cualquier tecnología.
 
+- **`domain.usecase`**  
+  Define e implementa los casos de uso del negocio. Aquí se concentra la lógica central, como crear, actualizar, listar productos o movimientos.
+
+- **`application`**  
+  Orquesta los casos de uso definidos en el dominio. Actúa como una capa intermedia que transforma datos, aplica validaciones y expone servicios a los adaptadores. No contiene lógica de infraestructura.
+
+- **`infrastructure`**  
+  Implementa los adaptadores externos: controladores REST, repositorios JPA, mappers, clientes HTTP, etc. Esta capa se comunica con la capa de `application` para ejecutar los casos de uso.
+
+- **`config`**  
+  Contiene configuraciones generales como Swagger, CORS, configuración de base de datos, etc.
+
+Este diseño mejora la mantenibilidad, facilita las pruebas unitarias y permite cambiar componentes tecnológicos sin afectar el núcleo del negocio.
 
 
 ## ⚙️ Configuración previa
