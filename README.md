@@ -19,6 +19,35 @@ Esta es una aplicación desarrollada como parte de una prueba técnica. Permite 
 
 
 ---
+## 🧩 Diagrama de la Aplicación
+
+La estructura de la aplicación sigue una arquitectura hexagonal, organizada de la siguiente manera:
+
+```
+📦 src
+ └── 📦 main
+     ├── 📁 java
+     │    └── 📦 com.example.productos
+     │         ├── 📁 domain          # Entidades del dominio y casos de uso
+     │         │    ├── 📁 model      # Entidades del dominio (Producto, Movimiento, etc.)
+     │         │    └── 📁 usecase    # Casos de uso del negocio (crear, listar, actualizar, etc.)
+     │         ├── 📁 infrastructure  # Adaptadores externos: controladores REST, repositorios, etc.
+     │         └── 📁 config          # Configuraciones generales (Swagger, CORS, etc.)
+     └── 📁 resources
+          ├── application.yml        # Configuración de la app (base de datos, puertos, etc.)
+          └── data.sql               # (Opcional) Datos precargados
+```
+
+### Estructura por capas
+
+- **`domain.model`**: contiene las entidades del dominio (por ejemplo: `Producto`, `Movimiento`).
+- **`domain.usecase`**: implementa la lógica central del negocio y los casos de uso (crear producto, crear movimiento, etc.).
+- **`infrastructure`**: incluye los adaptadores externos como controladores REST, repositorios JPA, mappers, etc.
+- **`config`**: configuraciones de Swagger, conexión a base de datos, etc.
+
+Este diseño sigue los principios de la **arquitectura hexagonal (Ports and Adapters)**, separando claramente el núcleo de la aplicación de los detalles de infraestructura.
+
+
 
 ## ⚙️ Configuración previa
 
